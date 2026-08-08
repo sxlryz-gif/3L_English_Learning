@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3L英語二年級（下）至三年級（上）13課互動學習樂園</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --primary-hover: #357ABD;
+            --success: #2ECC71;
+            --error: #E74C3C;
+            --warning: #F39C12;
+            --purple: #9B59B6;
+            --bg-color: #F0F4F8;
+            --card-bg: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-gray: #7F8C8D;
+            --border-radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .lesson-selector-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 850px;
+            min-height: 40px;
+        }
+
+        .lesson-nav-btn {
+            background: #E2E8F0;
+            color: var(--text-dark);
+            border: none;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s;
+        }
+
+        .lesson-nav-btn:hover {
+            background: #CBD5E1;
+        }
+
+        .lesson-nav-btn.active {
+            background: var(--purple);
+            color: white;
+            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: #E2E8F0;
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 800px;
+            padding: 24px;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .score-board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .score-badge {
+            background: #E8F8F0;
+            color: #1E8449;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 1rem;
+            border: 1px solid #A3E4D7;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background-color: #E2E8F0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-img-box {
+            width: 100%;
+            max-height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #E2E8F0;
+            margin-bottom: 20px;
+        }
+
+        .quiz-img-box img {
+            max-height: 250px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .option-btn {
+    background: #F8FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: pre-line;
+}
+
+        .opt-speaker {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 6px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #F0F7FF;
+        }
+
+        .option-btn.correct {
+            background: #E8F8F0;
+            border-color: var(--success);
+            color: #1E8449;
+        }
+
+        .option-btn.wrong {
+            background: #FADBD8;
+            border-color: var(--error);
+            color: #78281F;
+        }
+
+        .matching-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .match-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .match-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .match-card {
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .match-card img {
+            max-height: 50px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .match-card.selected {
+            border-color: var(--primary);
+            background: #E3F2FD;
+        }
+
+        .match-card.matched {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .unscramble-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .unscramble-target-area {
+            width: 100%;
+            min-height: 80px;
+            background: #F8FAFC;
+            border: 2px dashed #CBD5E1;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .unscramble-source-area {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .word-tile {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .word-tile.used {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+            border-color: #CBD5E1;
+            color: #CBD5E1;
+        }
+
+        .unscramble-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .action-btn {
+            background: #E2E8F0;
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .action-btn.submit {
+            background: var(--success);
+            color: white;
+        }
+
+        .roleplay-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .big-img-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #E2E8F0;
+            margin-bottom: 20px;
+            background: #FAFAFA;
+            text-align: center;
+        }
+
+        .big-img-container img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .dialogue-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dialogue-item {
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dialogue-speaker {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .dialogue-en {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 2px 0;
+        }
+
+        .dialogue-zh {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .play-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .feedback-text {
+            margin-top: 16px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-height: 28px;
+            text-align: center;
+        }
+
+        .final-report {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4A90E2, #357ABD);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .restart-btn {
+            margin-top: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>3L英語二年級（下）至三年級（上）13課互動學習樂園</h1>
+        <p>自由切換課文與練習模式，輕鬆掌握全部句型！</p>
+    </div>
+
+    <!-- 課文選擇導航（1 ~ 13 課） -->
+    <div class="lesson-selector-bar" id="lesson-nav-bar"></div>
+
+    <!-- 模式切換導航 -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" id="btn-quiz">🎯 1. 看圖選句</button>
+        <button class="tab-btn" id="btn-match">🔗 2. 圖文連連看</button>
+        <button class="tab-btn" id="btn-unscramble">🧩 3. 句子重組</button>
+        <button class="tab-btn" id="btn-roleplay">🎭 4. 角色點讀</button>
+    </div>
+
+    <div class="main-card">
+        <div class="score-board-header" id="global-score-board">
+            <span id="game-title-text">看圖選擇正確的句子</span>
+            <span class="score-badge" id="current-score-badge">💯 當前分數: 100</span>
+        </div>
+
+        <div class="progress-bar-container" id="global-progress-container">
+            <div class="progress-bar" id="global-progress-bar"></div>
+        </div>
+
+        <!-- 模式 1: 看圖選句 -->
+        <div class="quiz-view" id="quiz-view">
+            <div id="quiz-body" style="width: 100%;">
+                <div class="quiz-img-box">
+                    <img id="quiz-img" src="" alt="Quiz Scene" onerror="this.src='https://via.placeholder.com/350x250?text=Illustration'">
+                </div>
+                <div class="options-grid" id="options-grid"></div>
+            </div>
+        </div>
+
+        <!-- 模式 2: 圖文連連看 -->
+        <div class="matching-view" id="matching-view">
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 15px; font-weight: bold;">點擊左側圖片/中文，再點擊右側對應英文完成匹配！</p>
+            <div class="match-container">
+                <div class="match-column" id="match-left-col"></div>
+                <div class="match-column" id="match-right-col"></div>
+            </div>
+        </div>
+
+        <!-- 模式 3: 句子重組 -->
+        <div class="unscramble-view" id="unscramble-view">
+            <div class="quiz-img-box">
+                <img id="unscramble-img" src="" alt="Unscramble Scene" onerror="this.src='https://via.placeholder.com/350x250?text=Illustration'">
+            </div>
+            <p style="margin-bottom: 8px; font-weight: bold; color: var(--text-gray);">點擊詞塊拼出正確的句子：</p>
+            <div class="unscramble-target-area" id="unscramble-target"></div>
+            <div class="unscramble-source-area" id="unscramble-source"></div>
+            <div class="unscramble-controls">
+                <button class="action-btn" id="btn-reset-unscramble">↺ 清空重新拼</button>
+                <button class="action-btn submit" id="btn-check-unscramble">✓ 確認提交</button>
+            </div>
+        </div>
+
+        <!-- 模式 4: 角色點讀 -->
+        <div class="roleplay-view" id="roleplay-view">
+            <div class="big-img-container">
+                <img id="roleplay-big-img" src="" alt="Full Illustration" onerror="this.src='https://via.placeholder.com/600x350?text=Full+Lesson+Image'">
+            </div>
+            <div class="dialogue-list" id="dialogue-list"></div>
+        </div>
+
+        <!-- 結算報告 -->
+        <div class="final-report" id="final-report">
+            <h2 style="color: var(--primary); margin-bottom: 8px;">🎉 本課挑戰完成！</h2>
+            <div class="score-circle">
+                <span id="final-score" style="font-size:2.2rem; font-weight:bold;">100</span>
+                <span style="font-size:0.8rem;">最終得分</span>
+            </div>
+            <div id="final-stars" style="font-size:2rem; margin:10px 0;">⭐⭐⭐</div>
+            <p id="final-eval" style="font-weight: bold;"></p>
+        </div>
+
+        <div class="feedback-text" id="feedback"></div>
+        <div style="text-align: center;">
+            <button class="restart-btn" id="restart-btn" style="display: none;">🔄 重新本關挑戰</button>
+        </div>
+    </div>
+
+    <script>
+        const sentenceSpeakers = {
+            "Meet Sandy and Sue!": ["Narrator"],
+            "This is Sue's class.": ["Narrator"],
+            "Her teacher's Mr Crisp.": ["Narrator"],
+            "Which is your pen, Sue?": ["Mr Crisp"],
+            "The red pen, sir.": ["Sue"],
+            "Here you are, Sue.\nThank you, sir.": ["Mr Crisp", "Sue"],
+            "Who's that girl, Mr Crisp?\nWhich girl, Mr May?": ["Mr May", "Mr Crisp"],
+            "The girl on the red bicycle.": ["Mr May"],
+            "That's Sue Clark. She's in my class.": ["Mr Crisp"],
+            "Who's that boy, Mr Crisp?\nWhich boy, Mr May?": ["Mr May", "Mr Crisp"],
+            "The boy with the football.": ["Mr May"],
+            "That's Sandy Clark. He's Sue's brother.": ["Mr Crisp"],
+            "Kick the ball, Sandy!": ["Tom"],
+            "Look out, Mr May!": ["Mr Crisp"],
+            "Look at these shoes!": ["Gym Master"],
+            "Which are your shoes, Sandy?\nThe brown shoes, sir.": ["Gym Master", "Sandy"],
+            "What colour are your shoes, Tom?\nMy shoes are black, sir.": ["Gym Master", "Tom"],
+            "Here you are, Tom.\nThank you, sir.": ["Gym Master", "Tom"],
+            "There's a shoe on this locker. Whose is it?": ["Gym Master"],
+            "It's Billy's, sir.": ["Tom"],
+            "Kick the ball, Sandy!\nAll right, Tom.": ["Tom", "Sandy"],
+            "Look, Sandy!\nOh!": ["Tom", "Mr Crisp"],
+            "Sorry, Mr Crisp.\nIt's all right, Sandy.": ["Sandy", "Mr Crisp"],
+            "Whose is this ball?": ["Mr Crisp"],
+            "Is this your ball, Tom?\nNo, it isn't, sir.": ["Mr Crisp", "Tom"],
+            "Is this your ball, Sandy?\nYes, it is, sir.": ["Mr Crisp", "Sandy"],
+            "Look at my picture, Sue.\nThat's nice, Sandy.": ["Sandy", "Sue"],
+            "What's that?\nIt's a bicycle.": ["Sue", "Sandy"],
+            "Who's that?\nIt's Tom. He's on his bicycle.": ["Sue", "Sandy"],
+            "What's this?\nIt's a car.": ["Sue", "Sandy"],
+            "Who's this?\nIt's Mr Crisp.": ["Sue", "Sandy"],
+            "He's in his car.": ["Sandy"],
+            "Put on Dad's hat, Sandy!": ["Sue"],
+            "Put on Mum's shoes, Sue!": ["Sandy"],
+            "You are funny, Sue!\nYou're funny, too, Sandy!": ["Sandy", "Sue"],
+            "Come with me.": ["Sue"],
+            "Knock at the door, Sue.\nCome in!": ["Sandy", "Mother"],
+            "Look at me! I'm an actor.\nLook at me! I'm an actress.": ["Sandy", "Sue"],
+            "Who's that boy, Tom?\nWhich boy, Sandy?": ["Sandy", "Tom"],
+            "That fat boy.": ["Sandy"],
+            "He's a new boy. His name's Billy Briggs.\nLook at him!": ["Tom", "Sandy"],
+            "Billy!\nYes, Miss Williams.": ["Miss Williams", "Billy"],
+            "Open your desk and give me that apple.": ["Miss Williams"],
+            "I'm sorry, Miss Williams. I'm hungry.": ["Billy"],
+            "My bag's heavy!": ["Sandy"],
+            "What's in it, Sandy?": ["Tom"],
+            "Open it and see.": ["Sandy"],
+            "Six books and six exercise books.": ["Tom"],
+            "My bag's heavy, too.": ["Billy"],
+            "What's in it, Billy?": ["Tom"],
+            "Open it and see!": ["Billy"],
+            "One book, two apples, three oranges and a banana!": ["Tom"],
+            "This is Sandy's class.": ["Narrator"],
+            "His teacher's Miss Williams.": ["Narrator"],
+            "Whose is this cap?": ["Miss Williams"],
+            "It's Sandy's, Miss Williams.": ["Tom"],
+            "Sandy!\nYes, Miss Williams.": ["Miss Williams", "Sandy"],
+            "Come here, please.\nYes, Miss Williams.": ["Miss Williams", "Sandy"],
+            "Is this your cap?\nYes, it is.": ["Miss Williams", "Sandy"],
+            "Here you are, Sandy. Sit down, please.\nThank you, Miss Williams.": ["Miss Williams", "Sandy"],
+            "Are your hands clean, Sandy?\nYes, my hands are clean, Mum.": ["Mother", "Sandy"],
+            "Show me your hands, Sandy.": ["Mother"],
+            "Your hands aren't clean. They're very dirty!": ["Mother"],
+            "Go and wash your hands at once!\nAll right, Mum.": ["Mother", "Sandy"],
+            "Are your hands clean now, Sandy?\nYes, they are, Mum.": ["Mother", "Sandy"],
+            "Sandy! Look at my nice clean towel!": ["Mother"],
+            "These shoes are nice. Try on these shoes, Sue.": ["Mother"],
+            "Sit down here, please.": ["Salesman"],
+            "How are they, Sue?\nThey're very tight, Mum.": ["Mother", "Sue"],
+            "Oh, Mum! Look at those shoes. Those are pretty shoes.": ["Sue"],
+            "Here you are, young lady.": ["Salesman"],
+            "How are they, Sue?\nThey're just right!": ["Mother", "Sue"],
+            "What are these, Billy?\nThey're stamps.": ["Sandy", "Billy"],
+            "These are French stamps.": ["Billy"],
+            "And those are Italian stamps.": ["Billy"],
+            "Show me those Italian stamps, Billy. They're very pretty.": ["Sandy"],
+            "Give me this one please, Billy.\nGive me two apples then.": ["Sandy", "Billy"],
+            "Two apples for one stamp! No, thank you!": ["Sandy"],
+            "Both men duck to avoid the ball.": ["Narrator"],
+
+            "Whose are these sandwiches, Tom?\nThey're Billy's.": ["Sandy", "Tom"],
+            "Open the packet, Sandy.": ["Tom"],
+            "Take out the sandwiches.": ["Tom"],
+            "Put in this duster and this book.": ["Tom"],
+            "Hurry up! There's Billy!": ["Tom"],
+            "Hey! Leave my sandwiches alone!\nHere you are, Billy.": ["Billy", "Sandy"],
+            "That's funny. These sandwiches are very hard.": ["Billy"],
+            "Oh! Give me my sandwiches quickly!": ["Billy"],
+        };
+
+        const allLessonsData = [
+            {
+                lessonId: 1,
+                title: "Lesson 1 Meet Sandy and Sue!",
+                bigImg: "images/L1_Big.png",
+                items: [
+                    { id: 1, img: "images/L1_1.png", text: "Meet Sandy and Sue!", zh: "認識桑迪和蘇！", options: ["Meet Sandy and Sue!", "This is Sue's class.", "Her teacher's Mr Crisp."], correctIndex: 0, words: ["Meet", "Sandy", "and", "Sue!"] },
+                    { id: 2, img: "images/L1_2.png", text: "This is Sue's class.", zh: "這是蘇的班級。", options: ["Meet Sandy and Sue!", "This is Sue's class.", "Which is your pen, Sue?"], correctIndex: 1, words: ["This", "is", "Sue's", "class."] },
+                    { id: 3, img: "images/L1_3.png", text: "Her teacher's Mr Crisp.", zh: "她的老師是克里普先生。", options: ["The red pen, sir.", "Her teacher's Mr Crisp.", "Here you are, Sue."], correctIndex: 1, words: ["Her", "teacher's", "Mr", "Crisp."] },
+                    { id: 4, img: "images/L1_4.png", text: "Which is your pen, Sue?", zh: "蘇，哪支是你的筆？", options: ["Which is your pen, Sue?", "The red pen, sir.", "This is Sue's class."], correctIndex: 0, words: ["Which", "is", "your", "pen,", "Sue?"] },
+                    { id: 5, img: "images/L1_5.png", text: "The red pen, sir.", zh: "紅色的筆，先生。", options: ["Here you are, Sue.", "The red pen, sir.", "Meet Sandy and Sue!"], correctIndex: 1, words: ["The", "red", "pen,", "sir."] },
+                    { id: 6, img: "images/L1_6.png", text: "Here you are, Sue.\nThank you, sir.", zh: "給你，蘇。\n謝謝您，先生。", options: ["Here you are, Sue.\nThank you, sir.", "Her teacher's Mr Crisp.", "Which is your pen, Sue?"], correctIndex: 0, words: ["Here", "you", "are,", "Sue.", "Thank", "you,", "sir."] }
+                ],
+                roleplay: [
+                    { speaker: "Narrator", en: "Meet Sandy and Sue!", zh: "認識桑迪和蘇！", text: "Meet Sandy and Sue!" },
+                    { speaker: "Narrator", en: "This is Sue's class.", zh: "這是蘇的班級。", text: "This is Sue's class." },
+                    { speaker: "Narrator", en: "Her teacher's Mr Crisp.", zh: "她的老師是克里普先生。", text: "Her teacher's Mr Crisp." },
+                    { speaker: "Mr Crisp", en: "Which is your pen, Sue?", zh: "克里普先生：蘇，哪支是你的筆？", text: "Which is your pen, Sue?" },
+                    { speaker: "Sue", en: "The red pen, sir.", zh: "蘇：紅色的筆，先生。", text: "The red pen, sir." },
+                    { speaker: "Mr Crisp & Sue", en: "Here you are, Sue. — Thank you, sir.", zh: "克里普先生：給你，蘇。— 蘇：謝謝您，先生。", text: "Here you are, Sue.\nThank you, sir." }
+                ]
+            },
+{
+    lessonId: 2,
+    title: "Lesson 2 Look out, Mr May!",
+    bigImg: "images/L2_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L2_1.png",
+        text: "Who's that girl, Mr Crisp?\nWhich girl, Mr May?",
+        zh: "那個女孩是誰，克里普斯先生？\n哪一個女孩，梅先生？",
+        options: ["Who's that girl, Mr Crisp?\nWhich girl, Mr May?", "The girl on the red bicycle.", "That's Sue Clark. She's in my class."],
+        correctIndex: 0,
+        words: ["Who's", "that", "girl,", "Mr", "Crisp?", "Which", "girl,", "Mr", "May?"]
+      },
+      {
+        id: 2,
+        img: "images/L2_2.png",
+        text: "The girl on the red bicycle.",
+        zh: "騎紅色單車的那個女孩。",
+        options: ["The girl on the red bicycle.", "Who's that girl, Mr Crisp?\nWhich girl, Mr May?", "Who's that boy, Mr Crisp?\nWhich boy, Mr May?"],
+        correctIndex: 0,
+        words: ["The", "girl", "on", "the", "red", "bicycle."]
+      },
+      {
+        id: 3,
+        img: "images/L2_3.png",
+        text: "That's Sue Clark. She's in my class.",
+        zh: "那是蘇·克拉克。她在我的班上。",
+        options: ["That's Sue Clark. She's in my class.", "That's Sandy Clark. He's Sue's brother.", "The boy with the football."],
+        correctIndex: 0,
+        words: ["That's", "Sue", "Clark.", "She's", "in", "my", "class."]
+      },
+      {
+        id: 4,
+        img: "images/L2_4.png",
+        text: "Who's that boy, Mr Crisp?\nWhich boy, Mr May?",
+        zh: "那個男孩是誰，克里普斯先生？\n哪一個男孩，梅先生？",
+        options: ["Who's that boy, Mr Crisp?\nWhich boy, Mr May?", "Who's that girl, Mr Crisp?\nWhich girl, Mr May?", "Kick the ball, Sandy!"],
+        correctIndex: 0,
+        words: ["Who's", "that", "boy,", "Mr", "Crisp?", "Which", "boy,", "Mr", "May?"]
+      },
+      {
+        id: 5,
+        img: "images/L2_5.png",
+        text: "The boy with the football.",
+        zh: "拿足球的那個男孩。",
+        options: ["The boy with the football.", "The girl on the red bicycle.", "Look out, Mr May!"],
+        correctIndex: 0,
+        words: ["The", "boy", "with", "the", "football."]
+      },
+      {
+        id: 6,
+        img: "images/L2_6.png",
+        text: "That's Sandy Clark. He's Sue's brother.",
+        zh: "那是桑迪·克拉克。他是蘇的哥哥。",
+        options: ["That's Sandy Clark. He's Sue's brother.", "That's Sue Clark. She's in my class.", "The boy with the football."],
+        correctIndex: 0,
+        words: ["That's", "Sandy", "Clark.", "He's", "Sue's", "brother."]
+      },
+      {
+        id: 7,
+        img: "images/L2_7.png",
+        text: "Kick the ball, Sandy!",
+        zh: "踢球，桑迪！",
+        options: ["Kick the ball, Sandy!", "Look out, Mr May!", "Which boy, Mr May?"],
+        correctIndex: 0,
+        words: ["Kick", "the", "ball,", "Sandy!"]
+      },
+      {
+        id: 8,
+        img: "images/L2_8.png",
+        text: "Look out, Mr May!",
+        zh: "小心，梅先生！",
+        options: ["Look out, Mr May!", "Kick the ball, Sandy!", "The boy with the football."],
+        correctIndex: 0,
+        words: ["Look", "out,", "Mr", "May!"]
+      },
+      {
+        id: 9,
+        img: "images/L2_9.png",
+        text: "Both men duck to avoid the ball.",
+        zh: "兩人都蹲下躲避足球。",
+        options: ["Both men duck to avoid the ball.", "Look out, Mr May!", "Kick the ball, Sandy!"],
+        correctIndex: 0,
+        words: ["Both", "men", "duck", "to", "avoid", "the", "ball."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Mr May", en: "Who's that girl, Mr Crisp?", zh: "梅先生：那個女孩是誰，克里普斯先生？", text: "Who's that girl, Mr Crisp?" },
+      { speaker: "Mr Crisp", en: "Which girl, Mr May?", zh: "克里普斯先生：哪一個女孩，梅先生？", text: "Which girl, Mr May?" },
+      { speaker: "Mr May", en: "The girl on the red bicycle.", zh: "梅先生：騎紅色單車的那個女孩。", text: "The girl on the red bicycle." },
+      { speaker: "Mr Crisp", en: "That's Sue Clark. She's in my class.", zh: "克里普斯先生：那是蘇·克拉克。她在我的班上。", text: "That's Sue Clark. She's in my class." },
+      { speaker: "Mr May", en: "Who's that boy, Mr Crisp?", zh: "梅先生：那個男孩是誰，克里普斯先生？", text: "Who's that boy, Mr Crisp?" },
+      { speaker: "Mr Crisp", en: "Which boy, Mr May?", zh: "克里普斯先生：哪一個男孩，梅先生？", text: "Which boy, Mr May?" },
+      { speaker: "Mr May", en: "The boy with the football.", zh: "梅先生：拿足球的那個男孩。", text: "The boy with the football." },
+      { speaker: "Mr Crisp", en: "That's Sandy Clark.", zh: "克里普斯先生：那是桑迪·克拉克。", text: "That's Sandy Clark." },
+      { speaker: "Mr Crisp", en: "He's Sue's brother.", zh: "克里普斯先生：他是蘇的哥哥。", text: "He's Sue's brother." },
+      { speaker: "Tom", en: "Kick the ball, Sandy!", zh: "湯姆：踢球，桑迪！", text: "Kick the ball, Sandy!" },
+      { speaker: "Mr Crisp", en: "Look out, Mr May!", zh: "克里普斯先生：小心，梅先生！", text: "Look out, Mr May!" }
+    ]
+  },
+            {
+    lessonId: 3,
+    title: "Lesson 3 Look at these shoes!",
+    bigImg: "images/L3_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L3_1.png",
+        text: "Look at these shoes!",
+        zh: "看看這些鞋子！",
+        options: ["Look at these shoes!", "Which are your shoes, Sandy?\nThe brown shoes, sir.", "What colour are your shoes, Tom?\nMy shoes are black, sir."],
+        correctIndex: 0,
+        words: ["Look", "at", "these", "shoes!"]
+      },
+      {
+        id: 2,
+        img: "images/L3_2.png",
+        text: "Which are your shoes, Sandy?\nThe brown shoes, sir.",
+        zh: "哪雙是你的鞋子，桑迪？\n棕色的那雙，老師。",
+        options: ["Which are your shoes, Sandy?\nThe brown shoes, sir.", "Look at these shoes!", "Here you are, Tom.\nThank you, sir."],
+        correctIndex: 0,
+        words: ["Which", "are", "your", "shoes,", "Sandy?", "The", "brown", "shoes,", "sir."]
+      },
+      {
+        id: 3,
+        img: "images/L3_3.png",
+        text: "What colour are your shoes, Tom?\nMy shoes are black, sir.",
+        zh: "你的鞋子是什麼顏色的，湯姆？\n我的鞋子是黑色的，老師。",
+        options: ["What colour are your shoes, Tom?\nMy shoes are black, sir.", "Which are your shoes, Sandy?\nThe brown shoes, sir.", "There's a shoe on this locker. Whose is it?"],
+        correctIndex: 0,
+        words: ["What", "colour", "are", "your", "shoes,", "Tom?", "My", "shoes", "are", "black,", "sir."]
+      },
+      {
+        id: 4,
+        img: "images/L3_4.png",
+        text: "Here you are, Tom.\nThank you, sir.",
+        zh: "給你，湯姆。\n謝謝你，老師。",
+        options: ["Here you are, Tom.\nThank you, sir.", "Look at these shoes!", "It's Billy's, sir."],
+        correctIndex: 0,
+        words: ["Here", "you", "are,", "Tom.", "Thank", "you,", "sir."]
+      },
+      {
+        id: 5,
+        img: "images/L3_5.png",
+        text: "There's a shoe on this locker. Whose is it?",
+        zh: "這個儲物櫃上有一隻鞋。是誰的？",
+        options: ["There's a shoe on this locker. Whose is it?", "It's Billy's, sir.", "What colour are your shoes, Tom?\nMy shoes are black, sir."],
+        correctIndex: 0,
+        words: ["There's", "a", "shoe", "on", "this", "locker.", "Whose", "is", "it?"]
+      },
+      {
+        id: 6,
+        img: "images/L3_6.png",
+        text: "It's Billy's, sir.",
+        zh: "是比利的比利，老師。",
+        options: ["It's Billy's, sir.", "There's a shoe on this locker. Whose is it?", "Here you are, Tom.\nThank you, sir."],
+        correctIndex: 0,
+        words: ["It's", "Billy's,", "sir."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Gym Master", en: "Look at these shoes!", zh: "體育老師：看看這些鞋子！", text: "Look at these shoes!" },
+      { speaker: "Gym Master", en: "Which are your shoes, Sandy?", zh: "體育老師：哪雙是你的鞋子，桑迪？", text: "Which are your shoes, Sandy?" },
+      { speaker: "Sandy", en: "The brown shoes, sir.", zh: "桑迪：棕色的那雙，老師。", text: "The brown shoes, sir." },
+      { speaker: "Gym Master", en: "What colour are your shoes, Tom?", zh: "體育老師：你的鞋子是什麼顏色的，湯姆？", text: "What colour are your shoes, Tom?" },
+      { speaker: "Tom", en: "My shoes are black, sir.", zh: "湯姆：我的鞋子是黑色的，老師。", text: "My shoes are black, sir." },
+      { speaker: "Gym Master", en: "Here you are, Tom.", zh: "體育老師：給你，湯姆。", text: "Here you are, Tom." },
+      { speaker: "Tom", en: "Thank you, sir.", zh: "湯姆：謝謝你，老師。", text: "Thank you, sir." },
+      { speaker: "Gym Master", en: "There's a shoe on this locker. Whose is it?", zh: "體育老師：這個儲物櫃上有一隻鞋。是誰的？", text: "There's a shoe on this locker. Whose is it?" },
+      { speaker: "Tom", en: "It's Billy's, sir.", zh: "湯姆：是比利的，老師。", text: "It's Billy's, sir." }
+    ]
+  },
+            {
+    lessonId: 4,
+    title: "Lesson 4 Whose is this ball?",
+    bigImg: "images/L4_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L4_1.png",
+        text: "Kick the ball, Sandy!\nAll right, Tom.",
+        zh: "踢球，桑迪！\n好的，湯姆。",
+        options: ["Kick the ball, Sandy!\nAll right, Tom.", "Look, Sandy!\nOh!", "Whose is this ball?"],
+        correctIndex: 0,
+        words: ["Kick", "the", "ball,", "Sandy!", "All", "right,", "Tom."]
+      },
+      {
+        id: 2,
+        img: "images/L4_2.png",
+        text: "Look, Sandy!\nOh!",
+        zh: "看，桑迪！\n哦！",
+        options: ["Look, Sandy!\nOh!", "Sorry, Mr Crisp.\nIt's all right, Sandy.", "Is this your ball, Tom?"],
+        correctIndex: 0,
+        words: ["Look,", "Sandy!", "Oh!"]
+      },
+      {
+        id: 3,
+        img: "images/L4_3.png",
+        text: "Sorry, Mr Crisp.\nIt's all right, Sandy.",
+        zh: "對不起，克里普斯先生。\n沒關係，桑迪。",
+        options: ["Sorry, Mr Crisp.\nIt's all right, Sandy.", "Look, Sandy!\nOh!", "Is this your ball, Sandy?\nYes, it is, sir."],
+        correctIndex: 0,
+        words: ["Sorry,", "Mr", "Crisp.", "It's", "all", "right,", "Sandy."]
+      },
+      {
+        id: 4,
+        img: "images/L4_4.png",
+        text: "Whose is this ball?",
+        zh: "這是誰的球？",
+        options: ["Whose is this ball?", "Is this your ball, Tom?\nNo, it isn't, sir.", "Is this your ball, Sandy?\nYes, it is, sir."],
+        correctIndex: 0,
+        words: ["Whose", "is", "this", "ball?"]
+      },
+      {
+        id: 5,
+        img: "images/L4_5.png",
+        text: "Is this your ball, Tom?\nNo, it isn't, sir.",
+        zh: "這是你的球嗎，湯姆？\n不，不是的，老師。",
+        options: ["Is this your ball, Tom?\nNo, it isn't, sir.", "Is this your ball, Sandy?\nYes, it is, sir.", "Whose is this ball?"],
+        correctIndex: 0,
+        words: ["Is", "this", "your", "ball,", "Tom?", "No,", "it", "isn't,", "sir."]
+      },
+      {
+        id: 6,
+        img: "images/L4_6.png",
+        text: "Is this your ball, Sandy?\nYes, it is, sir.",
+        zh: "這是你的球嗎，桑迪？\n是的，它是，老師。",
+        options: ["Is this your ball, Sandy?\nYes, it is, sir.", "Is this your ball, Tom?\nNo, it isn't, sir.", "Sorry, Mr Crisp.\nIt's all right, Sandy."],
+        correctIndex: 0,
+        words: ["Is", "this", "your", "ball,", "Sandy?", "Yes,", "it", "is,", "sir."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Tom", en: "Kick the ball, Sandy!", zh: "湯姆：踢球，桑迪！", text: "Kick the ball, Sandy!" },
+      { speaker: "Sandy", en: "All right, Tom.", zh: "桑迪：好的，湯姆。", text: "All right, Tom." },
+      { speaker: "Tom", en: "Look, Sandy!", zh: "湯姆：看，桑迪！", text: "Look, Sandy!" },
+      { speaker: "Mr Crisp", en: "Oh!", zh: "克里普斯先生：哦！", text: "Oh!" },
+      { speaker: "Sandy", en: "Sorry, Mr Crisp.", zh: "桑迪：對不起，克里普斯先生。", text: "Sorry, Mr Crisp." },
+      { speaker: "Mr Crisp", en: "It's all right, Sandy.", zh: "克里普斯先生：沒關係，桑迪。", text: "It's all right, Sandy." },
+      { speaker: "Mr Crisp", en: "Whose is this ball?", zh: "克里普斯先生：這是誰的球？", text: "Whose is this ball?" },
+      { speaker: "Mr Crisp", en: "Is this your ball, Tom?", zh: "克里普斯先生：這是你的球嗎，湯姆？", text: "Is this your ball, Tom?" },
+      { speaker: "Tom", en: "No, it isn't, sir.", zh: "湯姆：不，不是的，老師。", text: "No, it isn't, sir." },
+      { speaker: "Mr Crisp", en: "Is this your ball, Sandy?", zh: "克里普斯先生：這是你的球嗎，桑迪？", text: "Is this your ball, Sandy?" },
+      { speaker: "Sandy", en: "Yes, it is, sir.", zh: "桑迪：是的，它是，老師。", text: "Yes, it is, sir." }
+    ]
+  },
+          {
+    lessonId: 5,
+    title: "Lesson 5 Look at my picture, Sue",
+    bigImg: "images/L5_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L5_1.png",
+        text: "Look at my picture, Sue.\nThat's nice, Sandy.",
+        zh: "看看我的畫，蘇。\n真漂亮，桑迪。",
+        options: ["Look at my picture, Sue.\nThat's nice, Sandy.", "What's that?\nIt's a bicycle.", "What's this?\nIt's a car."],
+        correctIndex: 0,
+        words: ["Look", "at", "my", "picture,", "Sue.", "That's", "nice,", "Sandy."]
+      },
+      {
+        id: 2,
+        img: "images/L5_2.png",
+        text: "What's that?\nIt's a bicycle.",
+        zh: "那是什麼？\n是一輛自行車。",
+        options: ["What's that?\nIt's a bicycle.", "What's this?\nIt's a car.", "Who's that? It's Tom."],
+        correctIndex: 0,
+        words: ["What's", "that?", "It's", "a", "bicycle."]
+      },
+      {
+        id: 3,
+        img: "images/L5_3.png",
+        text: "Who's that?\nIt's Tom. He's on his bicycle.",
+        zh: "那是誰？\n是湯姆。他在他的自行車上。",
+        options: ["Who's that?\nIt's Tom. He's on his bicycle.", "Who's this?\nIt's Mr Crisp.", "Look at my picture, Sue.\nThat's nice, Sandy."],
+        correctIndex: 0,
+        words: ["Who's", "that?", "It's", "Tom.", "He's", "on", "his", "bicycle."]
+      },
+      {
+        id: 4,
+        img: "images/L5_4.png",
+        text: "What's this?\nIt's a car.",
+        zh: "這是什麼？\n是一輛汽車。",
+        options: ["What's this?\nIt's a car.", "What's that?\nIt's a bicycle.", "He's in his car."],
+        correctIndex: 0,
+        words: ["What's", "this?", "It's", "a", "car."]
+      },
+      {
+        id: 5,
+        img: "images/L5_5.png",
+        text: "Who's this?\nIt's Mr Crisp.",
+        zh: "這是誰？\n是克里普斯先生。",
+        options: ["Who's this?\nIt's Mr Crisp.", "Who's that? It's Tom.", "He's in his car."],
+        correctIndex: 0,
+        words: ["Who's", "this?", "It's", "Mr", "Crisp."]
+      },
+      {
+        id: 6,
+        img: "images/L5_6.png",
+        text: "He's in his car.",
+        zh: "他在他的汽車裡。",
+        options: ["He's in his car.", "He's on his bicycle.", "Who's this?\nIt's Mr Crisp."],
+        correctIndex: 0,
+        words: ["He's", "in", "his", "car."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Sandy", en: "Look at my picture, Sue.", zh: "桑迪：看看我的畫，蘇。", text: "Look at my picture, Sue." },
+      { speaker: "Sue", en: "That's nice, Sandy.", zh: "蘇：真漂亮，桑迪。", text: "That's nice, Sandy." },
+      { speaker: "Sue", en: "What's that?", zh: "蘇：那是什麼？", text: "What's that?" },
+      { speaker: "Sandy", en: "It's a bicycle.", zh: "桑迪：是一輛自行車。", text: "It's a bicycle." },
+      { speaker: "Sue", en: "Who's that?", zh: "蘇：那是誰？", text: "Who's that?" },
+      { speaker: "Sandy", en: "It's Tom. He's on his bicycle.", zh: "桑迪：是湯姆。他在他的自行車上。", text: "It's Tom. He's on his bicycle." },
+      { speaker: "Sue", en: "What's this?", zh: "蘇：這是什麼？", text: "What's this?" },
+      { speaker: "Sandy", en: "It's a car.", zh: "桑迪：是一輛汽車。", text: "It's a car." },
+      { speaker: "Sue", en: "Who's this?", zh: "蘇：這是誰？", text: "Who's this?" },
+      { speaker: "Sandy", en: "It's Mr Crisp.", zh: "桑迪：是克里普斯先生。", text: "It's Mr Crisp." },
+      { speaker: "Sandy", en: "He's in his car.", zh: "桑迪：他在他的汽車裡。", text: "He's in his car." }
+    ]
+  },
+            {
+    lessonId: 6,
+    title: "Lesson 6 Put on Dad's hat, Sandy!",
+    bigImg: "images/L6_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L6_1.png",
+        text: "Put on Dad's hat, Sandy!",
+        zh: "戴上爸爸的帽子，桑迪！",
+        options: ["Put on Dad's hat, Sandy!", "Put on Mum's shoes, Sue!", "Come with me."],
+        correctIndex: 0,
+        words: ["Put", "on", "Dad's", "hat,", "Sandy!"]
+      },
+      {
+        id: 2,
+        img: "images/L6_2.png",
+        text: "Put on Mum's shoes, Sue!",
+        zh: "穿上媽媽的鞋子，蘇！",
+        options: ["Put on Mum's shoes, Sue!", "Put on Dad's hat, Sandy!", "You are funny, Sue!"],
+        correctIndex: 0,
+        words: ["Put", "on", "Mum's", "shoes,", "Sue!"]
+      },
+      {
+        id: 3,
+        img: "images/L6_3.png",
+        text: "You are funny, Sue!\nYou're funny, too, Sandy!",
+        zh: "你真滑稽，蘇！\n你也很滑稽，桑迪！",
+        options: ["You are funny, Sue!\nYou're funny, too, Sandy!", "Put on Mum's shoes, Sue!", "Knock at the door, Sue."],
+        correctIndex: 0,
+        words: ["You", "are", "funny,", "Sue!", "You're", "funny,", "too,", "Sandy!"]
+      },
+      {
+        id: 4,
+        img: "images/L6_4.png",
+        text: "Come with me.",
+        zh: "跟我來。",
+        options: ["Come with me.", "Knock at the door, Sue.", "Come in!"],
+        correctIndex: 0,
+        words: ["Come", "with", "me."]
+      },
+      {
+        id: 5,
+        img: "images/L6_5.png",
+        text: "Knock at the door, Sue.\nCome in!",
+        zh: "敲門，蘇。\n請進！",
+        options: ["Knock at the door, Sue.\nCome in!", "Come with me.", "Look at me! I'm an actor."],
+        correctIndex: 0,
+        words: ["Knock", "at", "the", "door,", "Sue.", "Come", "in!"]
+      },
+      {
+        id: 6,
+        img: "images/L6_6.png",
+        text: "Look at me! I'm an actor.\nLook at me! I'm an actress.",
+        zh: "看我！我是個男演員。\n看我！我是個女演員。",
+        options: ["Look at me! I'm an actor.\nLook at me! I'm an actress.", "You are funny, Sue!", "Knock at the door, Sue."],
+        correctIndex: 0,
+        words: ["Look", "at", "me!", "I'm", "an", "actor.", "Look", "at", "me!", "I'm", "an", "actress."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Sue", en: "Put on Dad's hat, Sandy!", zh: "蘇：戴上爸爸的帽子，桑迪！", text: "Put on Dad's hat, Sandy!" },
+      { speaker: "Sandy", en: "Put on Mum's shoes, Sue!", zh: "桑迪：穿上媽媽的鞋子，蘇！", text: "Put on Mum's shoes, Sue!" },
+      { speaker: "Sandy", en: "You are funny, Sue!", zh: "桑迪：你真滑稽，蘇！", text: "You are funny, Sue!" },
+      { speaker: "Sue", en: "You're funny, too, Sandy!", zh: "蘇：你也很滑稽，桑迪！", text: "You're funny, too, Sandy!" },
+      { speaker: "Sue", en: "Come with me.", zh: "蘇：跟我來。", text: "Come with me." },
+      { speaker: "Sandy", en: "Knock at the door, Sue.", zh: "桑迪：敲門，蘇。", text: "Knock at the door, Sue." },
+      { speaker: "Mother", en: "Come in!", zh: "媽媽：請進！", text: "Come in!" },
+      { speaker: "Sandy", en: "Look at me! I'm an actor.", zh: "桑迪：看我！我是個男演員。", text: "Look at me! I'm an actor." },
+      { speaker: "Sue", en: "Look at me! I'm an actress.", zh: "蘇：看我！我是個女演員。", text: "Look at me! I'm an actress." }
+    ]
+  },
+           {
+    lessonId: 7,
+    title: "Lesson 7 Who's that boy, Tom?",
+    bigImg: "images/L7_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L7_1.png",
+        text: "Who's that boy, Tom?\nWhich boy, Sandy?",
+        zh: "那個男孩是誰，湯姆？\n哪個男孩，桑迪？",
+        options: ["Who's that boy, Tom?\nWhich boy, Sandy?", "That fat boy.", "He's a new boy. His name's Billy Briggs."],
+        correctIndex: 0,
+        words: ["Who's", "that", "boy,", "Tom?", "Which", "boy,", "Sandy?"]
+      },
+      {
+        id: 2,
+        img: "images/L7_2.png",
+        text: "That fat boy.",
+        zh: "那個胖男孩。",
+        options: ["That fat boy.", "Who's that boy, Tom?", "Look at him!"],
+        correctIndex: 0,
+        words: ["That", "fat", "boy."]
+      },
+      {
+        id: 3,
+        img: "images/L7_3.png",
+        text: "He's a new boy. His name's Billy Briggs.\nLook at him!",
+        zh: "他是個新同學。他的名字叫比利·布里格斯。\n看看他！",
+        options: ["He's a new boy. His name's Billy Briggs.\nLook at him!", "That fat boy.", "Open your desk and give me that apple."],
+        correctIndex: 0,
+        words: ["He's", "a", "new", "boy.", "His", "name's", "Billy", "Briggs.", "Look", "at", "him!"]
+      },
+      {
+        id: 4,
+        img: "images/L7_4.png",
+        text: "Billy!\nYes, Miss Williams.",
+        zh: "比利！\n是的，威廉斯老師。",
+        options: ["Billy!\nYes, Miss Williams.", "Open your desk and give me that apple.", "I'm sorry, Miss Williams. I'm hungry."],
+        correctIndex: 0,
+        words: ["Billy!", "Yes,", "Miss", "Williams."]
+      },
+      {
+        id: 5,
+        img: "images/L7_5.png",
+        text: "Open your desk and give me that apple.",
+        zh: "打開你的課桌，把那個蘋果給我。",
+        options: ["Open your desk and give me that apple.", "Billy!\nYes, Miss Williams.", "I'm sorry, Miss Williams. I'm hungry."],
+        correctIndex: 0,
+        words: ["Open", "your", "desk", "and", "give", "me", "that", "apple."]
+      },
+      {
+        id: 6,
+        img: "images/L7_6.png",
+        text: "I'm sorry, Miss Williams. I'm hungry.",
+        zh: "對不起，威廉斯老師。我餓了。",
+        options: ["I'm sorry, Miss Williams. I'm hungry.", "Open your desk and give me that apple.", "Look at him!"],
+        correctIndex: 0,
+        words: ["I'm", "sorry,", "Miss", "Williams.", "I'm", "hungry."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Sandy", en: "Who's that boy, Tom?", zh: "桑迪：那個男孩是誰，湯姆？", text: "Who's that boy, Tom?" },
+      { speaker: "Tom", en: "Which boy, Sandy?", zh: "湯姆：哪個男孩，桑迪？", text: "Which boy, Sandy?" },
+      { speaker: "Sandy", en: "That fat boy.", zh: "桑迪：那個胖男孩。", text: "That fat boy." },
+      { speaker: "Tom", en: "He's a new boy. His name's Billy Briggs.", zh: "湯姆：他是個新同學。他的名字叫比利·布里格斯。", text: "He's a new boy. His name's Billy Briggs." },
+      { speaker: "Sandy", en: "Look at him!", zh: "桑迪：看看他！", text: "Look at him!" },
+      { speaker: "Miss Williams", en: "Billy!", zh: "威廉斯老師：比利！", text: "Billy!" },
+      { speaker: "Billy", en: "Yes, Miss Williams.", zh: "比利：是的，威廉斯老師。", text: "Yes, Miss Williams." },
+      { speaker: "Miss Williams", en: "Open your desk and give me that apple.", zh: "威廉斯老師：打開你的課桌，把那個蘋果給我。", text: "Open your desk and give me that apple." },
+      { speaker: "Billy", en: "I'm sorry, Miss Williams. I'm hungry.", zh: "比利：對不起，威廉斯老師。我餓了。", text: "I'm sorry, Miss Williams. I'm hungry." }
+    ]
+  },
+            {
+    lessonId: 8,
+    title: "Lesson 8 My bag's heavy!",
+    bigImg: "images/L8_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L8_1.png",
+        text: "My bag's heavy!",
+        zh: "我的書包好重！",
+        options: ["My bag's heavy!", "What's in it, Sandy?", "My bag's heavy, too."],
+        correctIndex: 0,
+        words: ["My", "bag's", "heavy!"]
+      },
+      {
+        id: 2,
+        img: "images/L8_2.png",
+        text: "What's in it, Sandy?",
+        zh: "裡面有什麼，桑迪？",
+        options: ["What's in it, Sandy?", "Open it and see.", "What's in it, Billy?"],
+        correctIndex: 0,
+        words: ["What's", "in", "it,", "Sandy?"]
+      },
+      {
+        id: 3,
+        img: "images/L8_3.png",
+        text: "Open it and see.",
+        zh: "打開看看吧。",
+        options: ["Open it and see.", "What's in it, Sandy?", "Open it and see!"],
+        correctIndex: 0,
+        words: ["Open", "it", "and", "see."]
+      },
+      {
+        id: 4,
+        img: "images/L8_4.png",
+        text: "Six books and six exercise books.",
+        zh: "六本書和六本練習本。",
+        options: ["Six books and six exercise books.", "One book, two apples, three oranges and a banana!", "My bag's heavy!"],
+        correctIndex: 0,
+        words: ["Six", "books", "and", "six", "exercise", "books."]
+      },
+      {
+        id: 5,
+        img: "images/L8_5.png",
+        text: "My bag's heavy, too.",
+        zh: "我的書包也很重。",
+        options: ["My bag's heavy, too.", "My bag's heavy!", "What's in it, Billy?"],
+        correctIndex: 0,
+        words: ["My", "bag's", "heavy,", "too."]
+      },
+      {
+        id: 6,
+        img: "images/L8_6.png",
+        text: "What's in it, Billy?",
+        zh: "裡面有什麼，比利？",
+        options: ["What's in it, Billy?", "What's in it, Sandy?", "Open it and see!"],
+        correctIndex: 0,
+        words: ["What's", "in", "it,", "Billy?"]
+      },
+      {
+        id: 7,
+        img: "images/L8_7.png",
+        text: "Open it and see!",
+        zh: "打開看看吧！",
+        options: ["Open it and see!", "Open it and see.", "My bag's heavy, too."],
+        correctIndex: 0,
+        words: ["Open", "it", "and", "see!"]
+      },
+      {
+        id: 8,
+        img: "images/L8_8.png",
+        text: "One book, two apples, three oranges and a banana!",
+        zh: "一本書，兩個蘋果，三個橙子和一根香蕉！",
+        options: ["One book, two apples, three oranges and a banana!", "Six books and six exercise books.", "What's in it, Billy?"],
+        correctIndex: 0,
+        words: ["One", "book,", "two", "apples,", "three", "oranges", "and", "a", "banana!"]
+      }
+    ],
+    roleplay: [
+      { speaker: "Sandy", en: "My bag's heavy!", zh: "桑迪：我的書包好重！", text: "My bag's heavy!" },
+      { speaker: "Tom", en: "What's in it, Sandy?", zh: "湯姆：裡面有什麼，桑迪？", text: "What's in it, Sandy?" },
+      { speaker: "Sandy", en: "Open it and see.", zh: "桑迪：打開看看吧。", text: "Open it and see." },
+      { speaker: "Tom", en: "Six books and six exercise books.", zh: "湯姆：六本書和六本練習本。", text: "Six books and six exercise books." },
+      { speaker: "Billy", en: "My bag's heavy, too.", zh: "比利：我的書包也很重。", text: "My bag's heavy, too." },
+      { speaker: "Tom", en: "What's in it, Billy?", zh: "湯姆：裡面有什麼，比利？", text: "What's in it, Billy?" },
+      { speaker: "Billy", en: "Open it and see!", zh: "比利：打開看看吧！", text: "Open it and see!" },
+      { speaker: "Tom", en: "One book, two apples, three oranges and a banana!", zh: "湯姆：一本書，兩個蘋果，三個橙子和一根香蕉！", text: "One book, two apples, three oranges and a banana!" }
+    ]
+  },
+            {
+    lessonId: 9,
+    title: "Lesson 9 This is Sandy's class",
+    bigImg: "images/L9_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L9_1.png",
+        text: "This is Sandy's class.",
+        zh: "這是桑迪的班級。",
+        options: ["This is Sandy's class.", "His teacher's Miss Williams.", "Whose is this cap?"],
+        correctIndex: 0,
+        words: ["This", "is", "Sandy's", "class."]
+      },
+      {
+        id: 2,
+        img: "images/L9_2.png",
+        text: "His teacher's Miss Williams.",
+        zh: "他的老師是威廉斯小姐。",
+        options: ["His teacher's Miss Williams.", "This is Sandy's class.", "It's Sandy's, Miss Williams."],
+        correctIndex: 0,
+        words: ["His", "teacher's", "Miss", "Williams."]
+      },
+      {
+        id: 3,
+        img: "images/L9_3.png",
+        text: "Whose is this cap?",
+        zh: "這是誰的帽子？",
+        options: ["Whose is this cap?", "It's Sandy's, Miss Williams.", "Is this your cap?"],
+        correctIndex: 0,
+        words: ["Whose", "is", "this", "cap?"]
+      },
+      {
+        id: 4,
+        img: "images/L9_4.png",
+        text: "It's Sandy's, Miss Williams.",
+        zh: "是桑迪的，威廉斯老師。",
+        options: ["It's Sandy's, Miss Williams.", "Whose is this cap?", "Is this your cap?"],
+        correctIndex: 0,
+        words: ["It's", "Sandy's,", "Miss", "Williams."]
+      },
+      {
+        id: 5,
+        img: "images/L9_5.png",
+        text: "Sandy!\nYes, Miss Williams.",
+        zh: "桑迪！\n是的，威廉斯老師。",
+        options: ["Sandy!\nYes, Miss Williams.", "Come here, please.", "Here you are, Sandy."],
+        correctIndex: 0,
+        words: ["Sandy!", "Yes,", "Miss", "Williams."]
+      },
+      {
+        id: 6,
+        img: "images/L9_6.png",
+        text: "Come here, please.\nYes, Miss Williams.",
+        zh: "請到這裡來。\n是的，威廉斯老師。",
+        options: ["Come here, please.\nYes, Miss Williams.", "Sandy!\nYes, Miss Williams.", "Sit down, please."],
+        correctIndex: 0,
+        words: ["Come", "here,", "please.", "Yes,", "Miss", "Williams."]
+      },
+      {
+        id: 7,
+        img: "images/L9_7.png",
+        text: "Is this your cap?\nYes, it is.",
+        zh: "這是你的帽子嗎？\n是的，它是。",
+        options: ["Is this your cap?\nYes, it is.", "Whose is this cap?", "Here you are, Sandy."],
+        correctIndex: 0,
+        words: ["Is", "this", "your", "cap?", "Yes,", "it", "is."]
+      },
+      {
+        id: 8,
+        img: "images/L9_8.png",
+        text: "Here you are, Sandy. Sit down, please.\nThank you, Miss Williams.",
+        zh: "給你，桑迪。請坐下。\n謝謝你，威廉斯老師。",
+        options: ["Here you are, Sandy. Sit down, please.\nThank you, Miss Williams.", "Is this your cap?\nYes, it is.", "Come here, please."],
+        correctIndex: 0,
+        words: ["Here", "you", "are,", "Sandy.", "Sit", "down,", "please.", "Thank", "you,", "Miss", "Williams."]
+      }
+    ],
+    roleplay: [
+      { speaker: "Narrator", en: "This is Sandy's class.", zh: "旁白：這是桑迪的班級。", text: "This is Sandy's class." },
+      { speaker: "Narrator", en: "His teacher's Miss Williams.", zh: "旁白：他的老師是威廉斯小姐。", text: "His teacher's Miss Williams." },
+      { speaker: "Miss Williams", en: "Whose is this cap?", zh: "威廉斯老師：這是誰的帽子？", text: "Whose is this cap?" },
+      { speaker: "Tom", en: "It's Sandy's, Miss Williams.", zh: "湯姆：是桑迪的，威廉斯老師。", text: "It's Sandy's, Miss Williams." },
+      { speaker: "Miss Williams", en: "Sandy!", zh: "威廉斯老師：桑迪！", text: "Sandy!" },
+      { speaker: "Sandy", en: "Yes, Miss Williams.", zh: "桑迪：是的，威廉斯老師。", text: "Yes, Miss Williams." },
+      { speaker: "Miss Williams", en: "Come here, please.", zh: "威廉斯老師：請到這裡來。", text: "Come here, please." },
+      { speaker: "Sandy", en: "Yes, Miss Williams.", zh: "桑迪：是的，威廉斯老師。", text: "Yes, Miss Williams." },
+      { speaker: "Miss Williams", en: "Is this your cap?", zh: "威廉斯老師：這是你的帽子嗎？", text: "Is this your cap?" },
+      { speaker: "Sandy", en: "Yes, it is.", zh: "桑迪：是的，它是。", text: "Yes, it is." },
+      { speaker: "Miss Williams", en: "Here you are, Sandy. Sit down, please.", zh: "威廉斯老師：給你，桑迪。請坐下。", text: "Here you are, Sandy. Sit down, please." },
+      { speaker: "Sandy", en: "Thank you, Miss Williams.", zh: "桑迪：謝謝你，威廉斯老師。", text: "Thank you, Miss Williams." }
+    ]
+  },
+            {
+    lessonId: 10,
+    title: "Lesson 10 Whose are these sandwiches, Tom?",
+    bigImg: "images/L10_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L10_1.png",
+        text: "Whose are these sandwiches, Tom?\nThey're Billy's.",
+        zh: "這些三明治是誰的，湯姆？\n是比利的。",
+        options: [
+          "Whose are these sandwiches, Tom?\nThey're Billy's.",
+          "Open the packet, Sandy.",
+          "Take out the sandwiches."
+        ],
+        correctIndex: 0,
+        words: ["Whose", "are", "these", "sandwiches,", "Tom?", "They're", "Billy's."]
+      },
+      {
+        id: 2,
+        img: "images/L10_2.png",
+        text: "Open the packet, Sandy.",
+        zh: "打開這個包裹，桑迪。",
+        options: [
+          "Open the packet, Sandy.",
+          "Whose are these sandwiches, Tom?",
+          "Take out the sandwiches."
+        ],
+        correctIndex: 0,
+        words: ["Open", "the", "packet,", "Sandy."]
+      },
+      {
+        id: 3,
+        img: "images/L10_3.png",
+        text: "Take out the sandwiches.",
+        zh: "把三明治拿出來。",
+        options: [
+          "Take out the sandwiches.",
+          "Open the packet, Sandy.",
+          "Put in this duster and this book."
+        ],
+        correctIndex: 0,
+        words: ["Take", "out", "the", "sandwiches."]
+      },
+      {
+        id: 4,
+        img: "images/L10_4.png",
+        text: "Put in this duster and this book.",
+        zh: "把這個板擦和這本書放進去。",
+        options: [
+          "Put in this duster and this book.",
+          "Take out the sandwiches.",
+          "Hurry up! There's Billy!"
+        ],
+        correctIndex: 0,
+        words: ["Put", "in", "this", "duster", "and", "this", "book."]
+      },
+      {
+        id: 5,
+        img: "images/L10_5.png",
+        text: "Hurry up! There's Billy!",
+        zh: "快點！比利來了！",
+        options: [
+          "Hurry up! There's Billy!",
+          "Put in this duster and this book.",
+          "Hey! Leave my sandwiches alone!"
+        ],
+        correctIndex: 0,
+        words: ["Hurry", "up!", "There's", "Billy!"]
+      },
+      {
+        id: 6,
+        img: "images/L10_6.png",
+        text: "Hey! Leave my sandwiches alone!\nHere you are, Billy.",
+        zh: "嘿！別動我的三明治！\n給你，比利。",
+        options: [
+          "Hey! Leave my sandwiches alone!\nHere you are, Billy.",
+          "Hurry up! There's Billy!",
+          "That's funny. These sandwiches are very hard."
+        ],
+        correctIndex: 0,
+        words: ["Hey!", "Leave", "my", "sandwiches", "alone!", "Here", "you", "are,", "Billy."]
+      },
+      {
+        id: 7,
+        img: "images/L10_7.png",
+        text: "That's funny. These sandwiches are very hard.",
+        zh: "真奇怪。這些三明治非常硬。",
+        options: [
+          "That's funny. These sandwiches are very hard.",
+          "Hey! Leave my sandwiches alone!",
+          "Oh! Give me my sandwiches quickly!"
+        ],
+        correctIndex: 0,
+        words: ["That's", "funny.", "These", "sandwiches", "are", "very", "hard."]
+      },
+      {
+        id: 8,
+        img: "images/L10_8.png",
+        text: "Oh! Give me my sandwiches quickly!",
+        zh: "噢！快把我的三明治給我！",
+        options: [
+          "Oh! Give me my sandwiches quickly!",
+          "That's funny. These sandwiches are very hard.",
+          "Here you are, Billy."
+        ],
+        correctIndex: 0,
+        words: ["Oh!", "Give", "me", "my", "sandwiches", "quickly!"]
+      }
+    ],
+    roleplay: [
+      { speaker: "Sandy", en: "Whose are these sandwiches, Tom?", zh: "桑迪：這些三明治是誰的，湯姆？", text: "Whose are these sandwiches, Tom?" },
+      { speaker: "Tom", en: "They're Billy's.", zh: "湯姆：是比利的。", text: "They're Billy's." },
+      { speaker: "Tom", en: "Open the packet, Sandy.", zh: "湯姆：打開這個包裹，桑迪。", text: "Open the packet, Sandy." },
+      { speaker: "Tom", en: "Take out the sandwiches.", zh: "湯姆：把三明治拿出來。", text: "Take out the sandwiches." },
+      { speaker: "Tom", en: "Put in this duster and this book.", zh: "湯姆：把這個板擦和這本書放進去。", text: "Put in this duster and this book." },
+      { speaker: "Tom", en: "Hurry up! There's Billy!", zh: "湯姆：快點！比利來了！", text: "Hurry up! There's Billy!" },
+      { speaker: "Billy", en: "Hey! Leave my sandwiches alone!", zh: "比利：嘿！別動我的三明治！", text: "Hey! Leave my sandwiches alone!" },
+      { speaker: "Sandy", en: "Here you are, Billy.", zh: "桑迪：給你，比利。", text: "Here you are, Billy." },
+      { speaker: "Billy", en: "That's funny. These sandwiches are very hard.", zh: "比利：真奇怪。這些三明治非常硬。", text: "That's funny. These sandwiches are very hard." },
+      { speaker: "Billy", en: "Oh! Give me my sandwiches quickly!", zh: "比利：噢！快把我的三明治給我！", text: "Oh! Give me my sandwiches quickly!" }
+    ]
+  },
+           {
+    lessonId: 11,
+    title: "Lesson 11 Are your hands clean, Sandy?",
+    bigImg: "images/L11_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L11_1.png",
+        text: "Are your hands clean, Sandy?\nYes, my hands are clean, Mum.",
+        zh: "你的手乾淨嗎，桑迪？\n是的，我的手很乾淨，媽媽。",
+        options: ["Are your hands clean, Sandy?\nYes, my hands are clean, Mum.", "Show me your hands, Sandy.", "Your hands aren't clean."],
+        correctIndex: 0,
+        words: ["Are", "your", "hands", "clean,", "Sandy?", "Yes,", "my", "hands", "are", "clean,", "Mum."]
+      },
+      {
+        id: 2,
+        img: "images/L11_2.png",
+        text: "Show me your hands, Sandy.",
+        zh: "把你的手拿給我看看，桑迪。",
+        options: ["Show me your hands, Sandy.", "Are your hands clean, Sandy?", "Go and wash your hands at once!"],
+        correctIndex: 0,
+        words: ["Show", "me", "your", "hands,", "Sandy."]
+      },
+      {
+        id: 3,
+        img: "images/L11_3.png",
+        text: "Your hands aren't clean. They're very dirty!",
+        zh: "你的手不乾淨。它們非常髒！",
+        options: ["Your hands aren't clean. They're very dirty!", "Show me your hands, Sandy.", "Are your hands clean now, Sandy?"],
+        correctIndex: 0,
+        words: ["Your", "hands", "aren't", "clean.", "They're", "very", "dirty!"]
+      },
+      {
+        id: 4,
+        img: "images/L11_4.png",
+        text: "Go and wash your hands at once!\nAll right, Mum.",
+        zh: "立刻去洗手！\n好的，媽媽。",
+        options: ["Go and wash your hands at once!\nAll right, Mum.", "Your hands aren't clean. They're very dirty!", "Sandy! Look at my nice clean towel!"],
+        correctIndex: 0,
+        words: ["Go", "and", "wash", "your", "hands", "at", "once!", "All", "right,", "Mum."]
+      },
+      {
+        id: 5,
+        img: "images/L11_5.png",
+        text: "Are your hands clean now, Sandy?\nYes, they are, Mum.",
+        zh: "現在你的手乾淨了嗎，桑迪？\n是的，乾淨了，媽媽。",
+        options: ["Are your hands clean now, Sandy?\nYes, they are, Mum.", "Go and wash your hands at once!", "Sandy! Look at my nice clean towel!"],
+        correctIndex: 0,
+        words: ["Are", "your", "hands", "clean", "now,", "Sandy?", "Yes,", "they", "are,", "Mum."]
+      },
+      {
+        id: 6,
+        img: "images/L11_6.png",
+        text: "Sandy! Look at my nice clean towel!",
+        zh: "桑迪！看看我漂亮又乾淨的毛巾！",
+        options: ["Sandy! Look at my nice clean towel!", "Are your hands clean now, Sandy?", "Your hands aren't clean."],
+        correctIndex: 0,
+        words: ["Sandy!", "Look", "at", "my", "nice", "clean", "towel!"]
+      }
+    ],
+    roleplay: [
+      { speaker: "Mother", en: "Are your hands clean, Sandy?", zh: "媽媽：你的手乾淨嗎，桑迪？", text: "Are your hands clean, Sandy?" },
+      { speaker: "Sandy", en: "Yes, my hands are clean, Mum.", zh: "桑迪：是的，我的手很乾淨，媽媽。", text: "Yes, my hands are clean, Mum." },
+      { speaker: "Mother", en: "Show me your hands, Sandy.", zh: "媽媽：把你的手拿給我看看，桑迪。", text: "Show me your hands, Sandy." },
+      { speaker: "Mother", en: "Your hands aren't clean. They're very dirty!", zh: "媽媽：你的手不乾淨。它們非常髒！", text: "Your hands aren't clean. They're very dirty!" },
+      { speaker: "Mother", en: "Go and wash your hands at once!", zh: "媽媽：立刻去洗手！", text: "Go and wash your hands at once!" },
+      { speaker: "Sandy", en: "All right, Mum.", zh: "桑迪：好的，媽媽。", text: "All right, Mum." },
+      { speaker: "Mother", en: "Are your hands clean now, Sandy?", zh: "媽媽：現在你的手乾淨了嗎，桑迪？", text: "Are your hands clean now, Sandy?" },
+      { speaker: "Sandy", en: "Yes, they are, Mum.", zh: "桑迪：是的，乾淨了，媽媽。", text: "Yes, they are, Mum." },
+      { speaker: "Mother", en: "Sandy! Look at my nice clean towel!", zh: "媽媽：桑迪！看看我漂亮又乾淨的毛巾！", text: "Sandy! Look at my nice clean towel!" }
+    ]
+  },
+            {
+    lessonId: 12,
+    title: "Lesson 12 These shoes are nice",
+    bigImg: "images/L12_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L12_1.png",
+        text: "These shoes are nice. Try on these shoes, Sue.",
+        zh: "這些鞋子很好看。試穿一下這雙鞋，蘇。",
+        options: ["These shoes are nice. Try on these shoes, Sue.", "Sit down here, please.", "Look at those shoes. Those are pretty shoes."],
+        correctIndex: 0,
+        words: ["These", "shoes", "are", "nice.", "Try", "on", "these", "shoes,", "Sue."]
+      },
+      {
+        id: 2,
+        img: "images/L12_2.png",
+        text: "Sit down here, please.",
+        zh: "請坐在這裡。",
+        options: ["Sit down here, please.", "These shoes are nice.", "How are they, Sue?"],
+        correctIndex: 0,
+        words: ["Sit", "down", "here,", "please."]
+      },
+      {
+        id: 3,
+        img: "images/L12_3.png",
+        text: "How are they, Sue?\nThey're very tight, Mum.",
+        zh: "它們怎麼樣，蘇？\n它們非常緊，媽媽。",
+        options: ["How are they, Sue?\nThey're very tight, Mum.", "How are they, Sue?\nThey're just right!", "Sit down here, please."],
+        correctIndex: 0,
+        words: ["How", "are", "they,", "Sue?", "They're", "very", "tight,", "Mum."]
+      },
+      {
+        id: 4,
+        img: "images/L12_4.png",
+        text: "Oh, Mum! Look at those shoes. Those are pretty shoes.",
+        zh: "噢，媽媽！看那些鞋子。那些鞋子真漂亮。",
+        options: ["Oh, Mum! Look at those shoes. Those are pretty shoes.", "How are they, Sue?\nThey're very tight, Mum.", "Here you are, young lady."],
+        correctIndex: 0,
+        words: ["Oh,", "Mum!", "Look", "at", "those", "shoes.", "Those", "are", "pretty", "shoes."]
+      },
+      {
+        id: 5,
+        img: "images/L12_5.png",
+        text: "Here you are, young lady.",
+        zh: "給你，小姑娘。",
+        options: ["Here you are, young lady.", "Look at those shoes.", "Sit down here, please."],
+        correctIndex: 0,
+        words: ["Here", "you", "are,", "young", "lady."]
+      },
+      {
+        id: 6,
+        img: "images/L12_6.png",
+        text: "How are they, Sue?\nThey're just right!",
+        zh: "它們怎麼樣，蘇？\n它們剛剛好！",
+        options: ["How are they, Sue?\nThey're just right!", "How are they, Sue?\nThey're very tight, Mum.", "Here you are, young lady."],
+        correctIndex: 0,
+        words: ["How", "are", "they,", "Sue?", "They're", "just", "right!"]
+      }
+    ],
+    roleplay: [
+      { speaker: "Mother", en: "These shoes are nice.", zh: "媽媽：這些鞋子很好看。", text: "These shoes are nice." },
+      { speaker: "Mother", en: "Try on these shoes, Sue.", zh: "媽媽：試穿一下這雙鞋，蘇。", text: "Try on these shoes, Sue." },
+      { speaker: "Salesman", en: "Sit down here, please.", zh: "售貨員：請坐在這裡。", text: "Sit down here, please." },
+      { speaker: "Mother", en: "How are they, Sue?", zh: "媽媽：它們怎麼樣，蘇？", text: "How are they, Sue?" },
+      { speaker: "Sue", en: "They're very tight, Mum.", zh: "蘇：它們非常緊，媽媽。", text: "They're very tight, Mum." },
+      { speaker: "Sue", en: "Oh, Mum! Look at those shoes.", zh: "蘇：噢，媽媽！看那些鞋子。", text: "Oh, Mum! Look at those shoes." },
+      { speaker: "Sue", en: "Those are pretty shoes.", zh: "蘇：那些鞋子真漂亮。", text: "Those are pretty shoes." },
+      { speaker: "Salesman", en: "Here you are, young lady.", zh: "售貨員：給你，小姑娘。", text: "Here you are, young lady." },
+      { speaker: "Mother", en: "How are they, Sue?", zh: "媽媽：它們怎麼樣，蘇？", text: "How are they, Sue?" },
+      { speaker: "Sue", en: "They're just right!", zh: "蘇：它們剛剛好！", text: "They're just right!" }
+    ]
+  },
+          {
+    lessonId: 13,
+    title: "Lesson 13 What are these, Billy?",
+    bigImg: "images/L13_Big.png",
+    items: [
+      {
+        id: 1,
+        img: "images/L13_1.png",
+        text: "What are these, Billy?\nThey're stamps.",
+        zh: "這些是什麼，比利？\n是郵票。",
+        options: ["What are these, Billy?\nThey're stamps.", "These are French stamps.", "And those are Italian stamps."],
+        correctIndex: 0,
+        words: ["What", "are", "these,", "Billy?", "They're", "stamps."]
+      },
+      {
+        id: 2,
+        img: "images/L13_2.png",
+        text: "These are French stamps.",
+        zh: "這些是法國郵票。",
+        options: ["These are French stamps.", "What are these, Billy?", "And those are Italian stamps."],
+        correctIndex: 0,
+        words: ["These", "are", "French", "stamps."]
+      },
+      {
+        id: 3,
+        img: "images/L13_3.png",
+        text: "And those are Italian stamps.",
+        zh: "那些是義大利郵票。",
+        options: ["And those are Italian stamps.", "These are French stamps.", "Show me those Italian stamps, Billy."],
+        correctIndex: 0,
+        words: ["And", "those", "are", "Italian", "stamps."]
+      },
+      {
+        id: 4,
+        img: "images/L13_4.png",
+        text: "Show me those Italian stamps, Billy. They're very pretty.",
+        zh: "拿那些義大利郵票給我看看，比利。它們真漂亮。",
+        options: ["Show me those Italian stamps, Billy. They're very pretty.", "Give me this one please, Billy.", "And those are Italian stamps."],
+        correctIndex: 0,
+        words: ["Show", "me", "those", "Italian", "stamps,", "Billy.", "They're", "very", "pretty."]
+      },
+      {
+        id: 5,
+        img: "images/L13_5.png",
+        text: "Give me this one please, Billy.\nGive me two apples then.",
+        zh: "請把這張給我，比利。\n那麼給我兩個蘋果吧。",
+        options: ["Give me this one please, Billy.\nGive me two apples then.", "Two apples for one stamp! No, thank you!", "Show me those Italian stamps, Billy."],
+        correctIndex: 0,
+        words: ["Give", "me", "this", "one", "please,", "Billy.", "Give", "me", "two", "apples", "then."]
+      },
+      {
+        id: 6,
+        img: "images/L13_6.png",
+        text: "Two apples for one stamp! No, thank you!",
+        zh: "兩個蘋果換一張郵票！不，謝謝了！",
+        options: ["Two apples for one stamp! No, thank you!", "Give me this one please, Billy.", "These are French stamps."],
+        correctIndex: 0,
+        words: ["Two", "apples", "for", "one", "stamp!", "No,", "thank", "you!"]
+      }
+    ],
+    roleplay: [
+      { speaker: "Sandy", en: "What are these, Billy?", zh: "桑迪：這些是什麼，比利？", text: "What are these, Billy?" },
+      { speaker: "Billy", en: "They're stamps.", zh: "比利：是郵票。", text: "They're stamps." },
+      { speaker: "Billy", en: "These are French stamps.", zh: "比利：這些是法國郵票。", text: "These are French stamps." },
+      { speaker: "Billy", en: "And those are Italian stamps.", zh: "比利：那些是義大利郵票。", text: "And those are Italian stamps." },
+      { speaker: "Sandy", en: "Show me those Italian stamps, Billy.", zh: "桑迪：拿那些義大利郵票給我看看，比利。", text: "Show me those Italian stamps, Billy." },
+      { speaker: "Sandy", en: "They're very pretty.", zh: "桑迪：它們真漂亮。", text: "They're very pretty." },
+      { speaker: "Sandy", en: "Give me this one please, Billy.", zh: "桑迪：請把這張給我，比利。", text: "Give me this one please, Billy." },
+      { speaker: "Billy", en: "Give me two apples then.", zh: "比利：那麼給我兩個蘋果吧。", text: "Give me two apples then." },
+      { speaker: "Sandy", en: "Two apples for one stamp! No, thank you!", zh: "桑迪：兩個蘋果換一張郵票！不，謝謝了！", text: "Two apples for one stamp! No, thank you!" }
+    ]
+            }
+        ];
+
+        let currentLessonIndex = 0;
+        let currentMode = 'quiz'; 
+        let currentItemIndex = 0;
+        let score = 100;
+        let selectedLeftCard = null;
+        let currentConstructedWords = [];
+
+        let lessonNavBar, btnQuiz, btnMatch, btnUnscramble, btnRoleplay;
+        let quizView, matchingView, unscrambleView, roleplayView, finalReport;
+        let gameTitleText, currentScoreBadge, globalProgressBar, globalScoreBoard, globalProgressContainer, feedback, restartBtn;
+
+        function speak(text) {
+            try {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.85;
+                    window.speechSynthesis.speak(utterance);
+                }
+            } catch (e) {
+                console.log("Audio speech not supported");
+            }
+        }
+
+        function formatOptionText(text) {
+            const speakers = sentenceSpeakers[text];
+            const lines = text.split('\n');
+            return lines.map((line, i) => {
+                const spk = speakers ? speakers[i] : null;
+                return spk ? `<span class="opt-speaker">${spk}</span>${line}` : line;
+            }).join('<br>');
+        }
+
+        function initLessonNav() {
+            lessonNavBar.innerHTML = '';
+            allLessonsData.forEach((lesson, index) => {
+                const btn = document.createElement('button');
+                btn.className = `lesson-nav-btn ${index === currentLessonIndex ? 'active' : ''}`;
+                btn.innerText = `第 ${lesson.lessonId} 課`;
+                btn.onclick = () => {
+                    currentLessonIndex = index;
+                    document.querySelectorAll('.lesson-nav-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    resetGame();
+                };
+                lessonNavBar.appendChild(btn);
+            });
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            [btnQuiz, btnMatch, btnUnscramble, btnRoleplay].forEach(btn => btn.classList.remove('active'));
+            if (mode === 'quiz') btnQuiz.classList.add('active');
+            if (mode === 'match') btnMatch.classList.add('active');
+            if (mode === 'unscramble') btnUnscramble.classList.add('active');
+            if (mode === 'roleplay') btnRoleplay.classList.add('active');
+
+            resetGame();
+        }
+
+        function resetGame() {
+            score = 100;
+            currentItemIndex = 0;
+            feedback.innerText = '';
+            restartBtn.style.display = 'none';
+            finalReport.style.display = 'none';
+
+            globalScoreBoard.style.display = 'flex';
+            globalProgressContainer.style.display = 'block';
+            updateScoreUI();
+
+            quizView.style.display = 'none';
+            matchingView.style.display = 'none';
+            unscrambleView.style.display = 'none';
+            roleplayView.style.display = 'none';
+
+            if (currentMode === 'quiz') {
+                gameTitleText.innerText = '看圖選擇正確的句子';
+                quizView.style.display = 'flex';
+                loadQuizItem();
+            } else if (currentMode === 'match') {
+                gameTitleText.innerText = '圖文與英文配對連連看';
+                matchingView.style.display = 'flex';
+                loadMatchingGame();
+            } else if (currentMode === 'unscramble') {
+                gameTitleText.innerText = '看圖重組英文句子';
+                unscrambleView.style.display = 'flex';
+                loadUnscrambleItem();
+            } else if (currentMode === 'roleplay') {
+                gameTitleText.innerText = '角色扮演與點讀朗讀';
+                globalScoreBoard.style.display = 'none';
+                globalProgressContainer.style.display = 'none';
+                roleplayView.style.display = 'flex';
+                loadRoleplay();
+            }
+        }
+
+        function updateScoreUI() {
+            currentScoreBadge.innerText = `💯 當前分數: ${score}`;
+        }
+
+        function loadQuizItem() {
+            const lesson = allLessonsData[currentLessonIndex];
+            const item = lesson.items[currentItemIndex];
+            const total = lesson.items.length;
+
+            globalProgressBar.style.width = `${((currentItemIndex) / total) * 100}%`;
+            gameTitleText.innerText = `【L${lesson.lessonId} 選句】第 ${currentItemIndex + 1} / ${total} 題`;
+
+            document.getElementById('quiz-img').src = item.img;
+            const optionsGrid = document.getElementById('options-grid');
+            optionsGrid.innerHTML = '';
+
+            item.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span>${formatOptionText(opt)}</span><span style="font-size: 1.2rem;">🔊</span>`;
+                btn.onclick = () => handleQuizOptionClick(idx, item.correctIndex, btn, item.text);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function handleQuizOptionClick(selectedIdx, correctIdx, btn, text) {
+            speak(text);
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+            if (selectedIdx === correctIdx) {
+                btn.classList.add('correct');
+                feedback.style.color = 'var(--success)';
+                feedback.innerText = '✓ 太棒了！回答正確！';
+                setTimeout(() => {
+                    currentItemIndex++;
+                    feedback.innerText = '';
+                    if (currentItemIndex < allLessonsData[currentLessonIndex].items.length) {
+                        loadQuizItem();
+                    } else {
+                        showFinalReport();
+                    }
+                }, 1000);
+            } else {
+                btn.classList.add('wrong');
+                allBtns[correctIdx].classList.add('correct');
+                score = Math.max(0, score - 10);
+                updateScoreUI();
+                feedback.style.color = 'var(--error)';
+                feedback.innerText = '❌ 答錯了，繼續加油！';
+                setTimeout(() => {
+                    currentItemIndex++;
+                    feedback.innerText = '';
+                    if (currentItemIndex < allLessonsData[currentLessonIndex].items.length) {
+                        loadQuizItem();
+                    } else {
+                        showFinalReport();
+                    }
+                }, 1500);
+            }
+        }
+
+        function loadMatchingGame() {
+            const lesson = allLessonsData[currentLessonIndex];
+            globalProgressBar.style.width = '50%';
+            
+            const leftCol = document.getElementById('match-left-col');
+            const rightCol = document.getElementById('match-right-col');
+            leftCol.innerHTML = '';
+            rightCol.innerHTML = '';
+            selectedLeftCard = null;
+
+            let leftItems = lesson.items.map(item => ({ id: item.id, img: item.img, zh: item.zh }));
+            let rightItems = lesson.items.map(item => ({ id: item.id, text: item.text }));
+
+            leftItems.sort(() => Math.random() - 0.5);
+            rightItems.sort(() => Math.random() - 0.5);
+
+            leftItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'match-card';
+                card.dataset.id = item.id;
+                card.innerHTML = `<img src="${item.img}" alt="pic"><br><span style="font-size:0.85rem; color:var(--text-gray);">${item.zh}</span>`;
+                card.onclick = () => {
+                    document.querySelectorAll('#match-left-col .match-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selectedLeftCard = card;
+                };
+                leftCol.appendChild(card);
+            });
+
+            rightItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'match-card';
+                card.dataset.id = item.id;
+                card.innerText = item.text;
+                card.onclick = () => {
+                    if (!selectedLeftCard) {
+                        feedback.style.color = 'var(--warning)';
+                        feedback.innerText = '請先點擊左側的圖片！';
+                        return;
+                    }
+                    speak(item.text);
+                    if (selectedLeftCard.dataset.id === card.dataset.id) {
+                        selectedLeftCard.classList.add('matched');
+                        card.classList.add('matched');
+                        selectedLeftCard = null;
+                        feedback.style.color = 'var(--success)';
+                        feedback.innerText = '✓ 匹配成功！';
+
+                        const remaining = document.querySelectorAll('#match-left-col .match-card:not(.matched)');
+                        if (remaining.length === 0) {
+                            globalProgressBar.style.width = '100%';
+                            setTimeout(() => showFinalReport(), 800);
+                        }
+                    } else {
+                        score = Math.max(0, score - 10);
+                        updateScoreUI();
+                        feedback.style.color = 'var(--error)';
+                        feedback.innerText = '❌ 匹配錯誤，再試一次！';
+                        selectedLeftCard.classList.remove('selected');
+                        selectedLeftCard = null;
+                    }
+                };
+                rightCol.appendChild(card);
+            });
+        }
+
+        function loadUnscrambleItem() {
+            const lesson = allLessonsData[currentLessonIndex];
+            const item = lesson.items[currentItemIndex];
+            const total = lesson.items.length;
+
+            globalProgressBar.style.width = `${((currentItemIndex) / total) * 100}%`;
+            gameTitleText.innerText = `【L${lesson.lessonId} 重組】第 ${currentItemIndex + 1} / ${total} 題`;
+
+            document.getElementById('unscramble-img').src = item.img;
+            const targetArea = document.getElementById('unscramble-target');
+            const sourceArea = document.getElementById('unscramble-source');
+
+            targetArea.innerHTML = '';
+            sourceArea.innerHTML = '';
+            currentConstructedWords = [];
+
+            let shuffledWords = [...item.words].sort(() => Math.random() - 0.5);
+
+            shuffledWords.forEach((word, index) => {
+                const tile = document.createElement('div');
+                tile.className = 'word-tile';
+                tile.innerText = word;
+
+                tile.onclick = () => {
+                    if (tile.classList.contains('used')) return;
+                    tile.classList.add('used');
+
+                    const targetTile = document.createElement('div');
+                    targetTile.className = 'word-tile';
+                    targetTile.innerText = word;
+                    targetTile.onclick = () => {
+                        targetArea.removeChild(targetTile);
+                        tile.classList.remove('used');
+                        currentConstructedWords = currentConstructedWords.filter(t => t !== targetTile);
+                    };
+
+                    targetArea.appendChild(targetTile);
+                    currentConstructedWords.push(targetTile);
+                };
+
+                sourceArea.appendChild(tile);
+            });
+        }
+
+        function loadRoleplay() {
+            const lesson = allLessonsData[currentLessonIndex];
+            document.getElementById('roleplay-big-img').src = lesson.bigImg;
+
+            const dialogueList = document.getElementById('dialogue-list');
+            dialogueList.innerHTML = '';
+
+            lesson.roleplay.forEach((line) => {
+                const item = document.createElement('div');
+                item.className = 'dialogue-item';
+                item.innerHTML = `
+                    <div class="dialogue-info">
+                        <span class="dialogue-speaker">${line.speaker}</span>
+                        <span class="dialogue-en">${line.en}</span>
+                        <span class="dialogue-zh">${line.zh}</span>
+                    </div>
+                    <div class="play-icon">🔊</div>
+                `;
+
+                item.onclick = () => {
+                    speak(line.text);
+                };
+
+                dialogueList.appendChild(item);
+            });
+        }
+
+        function showFinalReport() {
+            quizView.style.display = 'none';
+            matchingView.style.display = 'none';
+            unscrambleView.style.display = 'none';
+            roleplayView.style.display = 'none';
+
+            globalScoreBoard.style.display = 'none';
+            globalProgressContainer.style.display = 'none';
+
+            finalReport.style.display = 'flex';
+            document.getElementById('final-score').innerText = score;
+
+            const starsBox = document.getElementById('final-stars');
+            const evalText = document.getElementById('final-eval');
+
+            if (score === 100) {
+                starsBox.innerText = '⭐⭐⭐';
+                evalText.innerText = '🏆 太棒了！完美通關，全對滿分！';
+            } else if (score >= 80) {
+                starsBox.innerText = '⭐⭐';
+                evalText.innerText = '🌟 表現非常優秀！繼續保持！';
+            } else {
+                starsBox.innerText = '⭐';
+                evalText.innerText = '💪 已經很棒了，再試一次拿到滿分吧！';
+            }
+
+            restartBtn.style.display = 'inline-block';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lessonNavBar = document.getElementById('lesson-nav-bar');
+            btnQuiz = document.getElementById('btn-quiz');
+            btnMatch = document.getElementById('btn-match');
+            btnUnscramble = document.getElementById('btn-unscramble');
+            btnRoleplay = document.getElementById('btn-roleplay');
+
+            quizView = document.getElementById('quiz-view');
+            matchingView = document.getElementById('matching-view');
+            unscrambleView = document.getElementById('unscramble-view');
+            roleplayView = document.getElementById('roleplay-view');
+            finalReport = document.getElementById('final-report');
+
+            gameTitleText = document.getElementById('game-title-text');
+            currentScoreBadge = document.getElementById('current-score-badge');
+            globalProgressBar = document.getElementById('global-progress-bar');
+            globalScoreBoard = document.getElementById('global-score-board');
+            globalProgressContainer = document.getElementById('global-progress-container');
+            feedback = document.getElementById('feedback');
+            restartBtn = document.getElementById('restart-btn');
+
+            btnQuiz.onclick = () => switchMode('quiz');
+            btnMatch.onclick = () => switchMode('match');
+            btnUnscramble.onclick = () => switchMode('unscramble');
+            btnRoleplay.onclick = () => switchMode('roleplay');
+
+            document.getElementById('btn-reset-unscramble').onclick = () => loadUnscrambleItem();
+            document.getElementById('btn-check-unscramble').onclick = () => {
+                const lesson = allLessonsData[currentLessonIndex];
+                const item = lesson.items[currentItemIndex];
+                const userSentence = currentConstructedWords.map(t => t.innerText).join(' ');
+                const targetSentence = item.words.join(' ');
+
+                speak(item.text);
+
+                if (userSentence === targetSentence) {
+                    feedback.style.color = 'var(--success)';
+                    feedback.innerText = '✓ 拼寫完全正確！';
+                    setTimeout(() => {
+                        currentItemIndex++;
+                        feedback.innerText = '';
+                        if (currentItemIndex < lesson.items.length) {
+                            loadUnscrambleItem();
+                        } else {
+                            showFinalReport();
+                        }
+                    }, 1000);
+                } else {
+                    score = Math.max(0, score - 10);
+                    updateScoreUI();
+                    feedback.style.color = 'var(--error)';
+                    feedback.innerText = `❌ 順序有誤，正確為：${targetSentence}`;
+                }
+            };
+
+            restartBtn.onclick = () => resetGame();
+
+            initLessonNav();
+            resetGame();
+        });
+    </script>
+</body>
+</html>
